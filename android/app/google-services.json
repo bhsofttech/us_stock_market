@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370827623843",
+    "project_id": "us-stock-market-e54ea",
+    "storage_bucket": "us-stock-market-e54ea.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370827623843:android:090991a890d0dda27dee16",
+        "android_client_info": {
+          "package_name": "com.bhinfotech.usstockmarket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhEgxgIP0RmdvGVXE37I4pmsInPBpNDlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
