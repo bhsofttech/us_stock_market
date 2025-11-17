@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/Get.dart';
+import 'package:us_stock_market/controller/google_ads_controller.dart';
 import 'package:us_stock_market/controller/stock_controller.dart';
 import 'package:us_stock_market/widget/snap_helper_widget.dart';
 import 'package:us_stock_market/widget/svg_icon_widget.dart';
@@ -26,6 +27,8 @@ class _FuturesScreenState extends State<FuturesScreen> {
   @override
   void initState() {
     super.initState();
+        Get.find<GoogleAdsController>().showAds();
+
     // stockController
     //     .fetchFutures("https://in.tradingview.com/markets/futures/quotes-all/");
 

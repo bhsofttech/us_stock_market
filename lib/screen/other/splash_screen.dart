@@ -1,5 +1,7 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:us_stock_market/controller/google_ads_controller.dart';
 import 'package:us_stock_market/screen/other/home_setup_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,9 +19,13 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _logoAnimation;
   bool _hasNavigated = false;
 
+  final GoogleAdsController googleAdsController = Get.find();
+
   @override
   void initState() {
     super.initState();
+    googleAdsController.loadAdMobRewardedAd();
+
     // Initialize animation controller with longer duration for smoother effect
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 1500),

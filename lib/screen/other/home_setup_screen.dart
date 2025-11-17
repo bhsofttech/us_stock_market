@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:us_stock_market/screen/gas/gas_price.dart';
 import 'package:us_stock_market/screen/other/home_screen.dart';
 import 'package:us_stock_market/screen/bonds/bond_categories_screen.dart';
 import 'package:us_stock_market/screen/crypto/crypto_categories.dart';
@@ -6,7 +7,6 @@ import 'package:us_stock_market/screen/etf/etf_screen.dart';
 import 'package:us_stock_market/screen/futures/futures_screen.dart';
 import 'package:us_stock_market/screen/indices/indices_screen.dart';
 import 'package:us_stock_market/screen/stocks/stock_categories.dart';
-import 'package:us_stock_market/screen/side_menu/side_menu_screen.dart';
 
 class HomeSetUpScreen extends StatefulWidget {
   const HomeSetUpScreen({super.key});
@@ -26,7 +26,8 @@ class _HomeSetUpScreenState extends State<HomeSetUpScreen> {
     const IndicesScreen(),
     const EtfScreen(),
     const FuturesScreen(),
-    BondCategoriesScreen()
+    BondCategoriesScreen(),
+    const GasPrice()
   ];
 
   void _onItemTapped(int index) {
@@ -43,7 +44,7 @@ class _HomeSetUpScreenState extends State<HomeSetUpScreen> {
       backgroundColor: const Color(0xFF000000), // iOS Dark theme background
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(
               color: Color(0xFF2C2C2E),
@@ -101,6 +102,13 @@ class _HomeSetUpScreenState extends State<HomeSetUpScreen> {
                 size: isSmallScreen ? 20 : 22, // Reduced icon size
               ),
               label: 'Bonds',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.gas_meter,
+                size: isSmallScreen ? 20 : 22, // Reduced icon size
+              ),
+              label: 'Gas',
             ),
           ],
           currentIndex: _selectedIndex,

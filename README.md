@@ -20,4 +20,6 @@ https://in.tradingview.com/markets/futures/quotes-all/
 https://in.tradingview.com/markets/indices/quotes-major/
 
 
-
+https://time.is/United_States#google_vignette
+https://time.now/
+https://www.4menearme.com/tools/time-in-the-united-states-by-state/

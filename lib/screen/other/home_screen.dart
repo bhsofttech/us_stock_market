@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:us_stock_market/controller/db_controller.dart';
+import 'package:us_stock_market/controller/google_ads_controller.dart';
 import 'package:us_stock_market/controller/stock_controller.dart';
 import 'package:us_stock_market/main.dart';
 import 'package:us_stock_market/screen/side_menu/side_menu_screen.dart';
@@ -59,6 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    Get.find<GoogleAdsController>().showAds();
+
     // Fetch data for all categories
     dashBordController.loadLargeCapStocks(
         "https://in.tradingview.com/markets/stocks-usa/market-movers-large-cap/");

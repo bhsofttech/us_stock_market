@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:us_stock_market/controller/google_ads_controller.dart';
 import 'package:us_stock_market/controller/stock_controller.dart';
 import 'package:us_stock_market/main.dart';
 import 'package:us_stock_market/widget/snap_helper_widget.dart';
@@ -25,6 +26,8 @@ class _EtfScreenState extends State<EtfScreen> {
   @override
   void initState() {
     super.initState();
+        Get.find<GoogleAdsController>().showAds();
+
     // stockController
     //     .fetchETF("https://in.tradingview.com/markets/etfs/funds-usa/");
 

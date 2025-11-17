@@ -23,6 +23,14 @@
         android:label="US Stock Market"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713"/> -->
+
+         <!-- Real AdMob app ID: ca-app-pub-4630063238239050~2317061247  -->
+         <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-4630063238239050~2268565565"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

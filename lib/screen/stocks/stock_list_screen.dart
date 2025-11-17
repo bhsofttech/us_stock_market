@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:us_stock_market/controller/google_ads_controller.dart';
 import 'package:us_stock_market/controller/stock_controller.dart';
 import 'package:us_stock_market/widget/svg_icon_widget.dart';
 
@@ -22,6 +23,9 @@ class _StockListScreenState extends State<StockListScreen> {
   @override
   void initState() {
     super.initState();
+
+    Get.find<GoogleAdsController>().showAds();
+
     stockController.fetchStocks(widget.url);
 
     // sync vertical
