@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:us_stock_market/controller/google_ads_controller.dart';
 import 'package:us_stock_market/screen/gas/gas_controller.dart';
 import 'package:us_stock_market/screen/gas/gas_info.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class GasStateWisePrice extends StatefulWidget {
   final Gasinfo gasinfo;
@@ -17,18 +18,18 @@ class GasStateWisePrice extends StatefulWidget {
 class _GasStateWiseGasPriceState extends State<GasStateWisePrice> {
   final GasController _gasController = Get.find();
 
-  // iOS Dark theme color palette
-  final Color primaryBlue = const Color(0xFF0A84FF);
+  // Modern iOS color palette
+  final Color primaryBlue = const Color(0xFF007AFF);
   final Color darkBlue = const Color(0xFF0A4B9A);
-  final Color lightBlue = const Color(0xFF5AC8FA);
-  final Color backgroundGray = const Color(0xFF1C1C1E);
-  final Color cardWhite = const Color(0xFF1C1C1E);
-  final Color textPrimary = const Color(0xFFFFFFFF);
+  final Color lightBlue = const Color(0xFF4DA6FF);
+  final Color backgroundGray = const Color(0xFFF2F2F7);
+  final Color cardWhite = const Color(0xFFFFFFFF);
+  final Color textPrimary = const Color(0xFF1C1C1E);
   final Color textSecondary = const Color(0xFF8E8E93);
-  final Color separatorGray = const Color(0xFF2C2C2E);
-  final Color successGreen = const Color(0xFF30D158);
+  final Color separatorGray = const Color(0xFFD1D1D6);
+  final Color successGreen = const Color(0xFF34C759);
   final Color warningOrange = const Color(0xFFFF9500);
-  final Color errorRed = const Color(0xFFFF453A);
+  final Color errorRed = const Color(0xFFFF3B30);
   final Color purpleAccent = const Color(0xFFAF52DE);
 
   @override
@@ -52,10 +53,11 @@ class _GasStateWiseGasPriceState extends State<GasStateWisePrice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: backgroundGray,
       appBar: _buildAppBar(),
       body: SafeArea(
         child: Container(
+          color: backgroundGray,
           child: Obx(
             () => _gasController.showGasDetailLoading.value
                 ? _buildLoadingState()
@@ -69,19 +71,35 @@ class _GasStateWiseGasPriceState extends State<GasStateWisePrice> {
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
       leadingWidth: 50,
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: cardWhite,
       elevation: 0,
       centerTitle: true,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
       title: Text(
         "${widget.gasinfo.city} Gas Price".toUpperCase(),
-        style: const TextStyle(
-          fontWeight: FontWeight.w700,
-          fontSize: 16, // Reduced font size
-          color: Color(0xFFFFFFFF),
+        style: TextStyle(
+          color: primaryBlue,
+          fontFamily: "SF Pro Display",
+          fontSize:
+              16.0, // Reduced font size for consistency with gas_price.dart
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.5,
         ),
       ),
-      iconTheme: const IconThemeData(
-        color: Color(0xFFFFFFFF),
+      iconTheme: IconThemeData(color: primaryBlue),
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          color: cardWhite,
+          border: Border(
+            bottom: BorderSide(
+              color: separatorGray,
+              width: 0.33,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -94,7 +112,7 @@ class _GasStateWiseGasPriceState extends State<GasStateWisePrice> {
           Column(
             children: [
               CircularProgressIndicator(
-                color: Colors.white,
+                color: primaryBlue,
               ),
               const SizedBox(height: 12), // Tighter spacing
               Text(
@@ -132,7 +150,7 @@ class _GasStateWiseGasPriceState extends State<GasStateWisePrice> {
       decoration: BoxDecoration(
         borderRadius:
             BorderRadius.circular(12), // Smaller radius for modern look
-        color: Color(0xFF1C1C1E),
+        color: cardWhite,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.06),
@@ -190,7 +208,7 @@ class _GasStateWiseGasPriceState extends State<GasStateWisePrice> {
                     child: Text(
                       _gasController.getGasDetails[index].city,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textPrimary,
                         fontFamily: "SF Pro Display",
                         fontSize:
                             isFirstItem ? 18.0 : 16.0, // Reduced font sizes
@@ -330,7 +348,14 @@ class _GasStateWiseGasPriceState extends State<GasStateWisePrice> {
       padding: const EdgeInsets.all(12), // Reduced padding
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10), // Smaller radius
-
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            backgroundGray,
+            backgroundGray.withOpacity(0.7),
+          ],
+        ),
         border: Border.all(
           color: separatorGray.withOpacity(0.3),
           width: 0.5,

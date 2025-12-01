@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:us_stock_market/controller/google_ads_controller.dart';
-import 'package:us_stock_market/screen/gas/gas_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:us_stock_market/controller/google_ads_controller.dart';
+import 'package:us_stock_market/screen/gas/gas_controller.dart';
 import 'package:us_stock_market/screen/gas/gas_state_wise_price.dart';
 import 'package:us_stock_market/widget/data_widget.dart';
 
@@ -17,15 +17,15 @@ class _GasPriceState extends State<GasPrice> {
   final GasController _gasController = Get.find();
   final GoogleAdsController _googleAdsController = Get.find();
 
-  // iOS Dark theme color palette
-  final Color primaryBlue = const Color(0xFF0A84FF);
+  // Modern iOS color palette
+  final Color primaryBlue = const Color(0xFF007AFF);
   final Color darkBlue = const Color(0xFF0A4B9A);
-  final Color lightBlue = const Color(0xFF5AC8FA);
-  final Color backgroundGray = const Color(0xFF1C1C1E);
-  final Color cardWhite = const Color(0xFF1C1C1E);
-  final Color textPrimary = const Color(0xFFFFFFFF);
+  final Color lightBlue = const Color(0xFF4DA6FF);
+  final Color backgroundGray = const Color(0xFFF2F2F7);
+  final Color cardWhite = const Color(0xFFFFFFFF);
+  final Color textPrimary = const Color(0xFF1C1C1E);
   final Color textSecondary = const Color(0xFF8E8E93);
-  final Color separatorGray = const Color(0xFF2C2C2E);
+  final Color separatorGray = const Color(0xFFD1D1D6);
 
   @override
   void initState() {
@@ -49,24 +49,38 @@ class _GasPriceState extends State<GasPrice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: backgroundGray,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1C1C1E), // iOS Dark theme app bar
+        leadingWidth: 50,
+        backgroundColor: cardWhite,
         elevation: 0,
         centerTitle: true,
         title: Text(
           "USA State Gas Price".toUpperCase(),
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 16, // Reduced font size
-            color: Color(0xFFFFFFFF),
+          style: TextStyle(
+            color: primaryBlue,
+            fontFamily: "SF Pro Display",
+            fontSize: 16.0, // Reduced font size for a cleaner look
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
           ),
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: primaryBlue),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: cardWhite,
+            border: Border(
+              bottom: BorderSide(
+                color: separatorGray,
+                width: 0.33,
+              ),
+            ),
+          ),
+        ),
       ),
       body: SafeArea(
-        top: false,
         child: Container(
+          color: backgroundGray,
           child: Obx(
             () => _gasController.showGasLoading.value
                 ? _buildLoadingState()
@@ -83,7 +97,7 @@ class _GasPriceState extends State<GasPrice> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(
-            color: Colors.white,
+            color: primaryBlue,
           ),
           const SizedBox(height: 16), // Reduced spacing for tighter layout
           Text(
@@ -103,9 +117,8 @@ class _GasPriceState extends State<GasPrice> {
   Widget _buildGasPriceList() {
     return Column(
       children: [
-        const SizedBox(height: 10),
-        const DateTimeWidget(),
-        const SizedBox(height: 10),
+       const SizedBox(height: 12),
+     const  DateTimeWidget(),
         Expanded(
             child: ListView.separated(
           padding: const EdgeInsets.symmetric(
@@ -126,8 +139,7 @@ class _GasPriceState extends State<GasPrice> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
             12), // Slightly smaller radius for modern look
-        color: const Color(0xFF1C1C1E), // iOS Dark theme card background
-
+        color: cardWhite,
         boxShadow: [
           BoxShadow(
             color: Colors.black
@@ -171,14 +183,31 @@ class _GasPriceState extends State<GasPrice> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          _gasController.gasInfo[index].city,
-          style: const TextStyle(
-            color: Colors.white,
-            fontFamily: "SF Pro Display",
-            fontSize: 16.0, // Reduced font size for better proportion
-            fontWeight: FontWeight.w600,
-            letterSpacing: -0.2,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                _gasController.gasInfo[index].city,
+                style: TextStyle(
+                  color: primaryBlue,
+                  fontFamily: "SF Pro Display",
+                  fontSize: 16.0, // Reduced font size for better proportion
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: -0.2,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "State Gas Prices",
+                style: TextStyle(
+                  color: textSecondary,
+                  fontFamily: "SF Pro Text",
+                  fontSize: 13.0, // Slightly smaller for hierarchy
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
           ),
         ),
         Container(
@@ -211,7 +240,14 @@ class _GasPriceState extends State<GasPrice> {
       decoration: BoxDecoration(
         borderRadius:
             BorderRadius.circular(10), // Smaller radius for modern look
-
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            backgroundGray,
+            backgroundGray.withOpacity(0.8),
+          ],
+        ),
         border: Border.all(
           color: separatorGray.withOpacity(0.3),
           width: 0.5,

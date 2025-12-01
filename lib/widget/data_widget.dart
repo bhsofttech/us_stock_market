@@ -13,15 +13,15 @@ class DateTimeWidget extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFF007AFF).withOpacity(0.1),
-            const Color(0xFF007AFF).withOpacity(0.05),
+             Colors.white.withOpacity(0.1),
+             Colors.white.withOpacity(0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(10), // Smaller radius
         border: Border.all(
-          color: const Color(0xFF007AFF).withOpacity(0.2),
+          color:  Colors.white.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -30,14 +30,14 @@ class DateTimeWidget extends StatelessWidget {
         children: [
           const Icon(
             Icons.schedule,
-            color: const Color(0xFF007AFF),
+            color:  Colors.white,
             size: 12, // Smaller icon
           ),
           const SizedBox(width: 4),
           Text(
             DateFormat('MMM d, yyyy').format(DateTime.now().toUtc().toLocal()),
             style: const TextStyle(
-              color: const Color(0xFF007AFF),
+              color:  Colors.white,
               fontSize: 11, // Smaller font
               fontWeight: FontWeight.w600,
               fontFamily: "SF Pro Text",

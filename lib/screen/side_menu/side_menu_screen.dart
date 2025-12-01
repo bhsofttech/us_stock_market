@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:us_stock_market/models/born_info.dart';
 import 'package:us_stock_market/screen/forex/forex_screen.dart';
+import 'package:us_stock_market/screen/gas/gas_price.dart';
+import 'package:us_stock_market/screen/service/pages/born_page.dart';
+import 'package:us_stock_market/screen/service/pages/country_list.dart';
+import 'package:us_stock_market/screen/service/pages/desial_price.dart';
+import 'package:us_stock_market/screen/service/pages/ev_price.dart';
+import 'package:us_stock_market/screen/service/pages/weather_screen.dart';
 import 'package:us_stock_market/screen/side_menu/economy_screen.dart';
 
 class SideMenuScreen extends StatefulWidget {
@@ -76,14 +83,14 @@ class _SideMenuScreenState extends State<SideMenuScreen>
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF000000),
       child: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(
             center: Alignment.center,
             radius: 1.2,
             colors: [
-              Color(0xFF1C2526),
+              Color(0xFF1C1C1E),
               Color(0xFF0A0E0F),
               Color(0xFF000000),
             ],
@@ -96,9 +103,9 @@ class _SideMenuScreenState extends State<SideMenuScreen>
             // Drawer Header
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.9),
+                color: const Color(0xFF1C1C1E),
                 border: const Border(
-                  bottom: BorderSide(color: Colors.white12, width: 0.5),
+                  bottom: BorderSide(color: Color(0xFF2C2C2E), width: 0.5),
                 ),
               ),
               child: AnimatedBuilder(
@@ -122,10 +129,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                                     height: 40,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.white.withOpacity(0.1),
+                                      color: const Color(0xFF0A84FF)
+                                          .withOpacity(0.2),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.white.withOpacity(0.15),
+                                          color: const Color(0xFF0A84FF)
+                                              .withOpacity(0.3),
                                           blurRadius: 10,
                                           spreadRadius: 2,
                                         ),
@@ -134,50 +143,46 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                                     child: const Icon(
                                       Icons.trending_up,
                                       size: 24,
-                                      color: Colors.white70,
+                                      color: Color(0xFFFFFFFF),
                                     ),
                                   ),
                                   const SizedBox(width: 12),
-                                  const Text(
-                                    'US Markets',
-                                    style: TextStyle(
-                                      fontFamily: 'SanFranciscoPro',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24,
-                                      color: Colors.white,
-                                      letterSpacing: -0.5,
-                                      shadows: [
-                                        Shadow(
-                                          color: Colors.white24,
-                                          blurRadius: 8,
-                                          offset: Offset(0, 1),
+                                  const Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'US Stock Market',
+                                        style: TextStyle(
+                                          fontFamily: 'SF Pro Display',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 18,
+                                          color: Color(0xFFFFFFFF),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Text(
+                                        'Real-time Insights',
+                                        style: TextStyle(
+                                          fontFamily: 'SF Pro Text',
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: Color(0xFF8E8E93),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                               IconButton(
-                                onPressed: () => Get.back(),
                                 icon: const Icon(
-                                  Icons.close_rounded,
-                                  color: Colors.white70,
-                                  size: 28,
+                                  Icons.close,
+                                  color: Color(0xFFFFFFFF),
+                                  size: 24,
                                 ),
-                                splashRadius: 20,
+                                onPressed: () => Navigator.of(context).pop(),
                               ),
                             ],
-                          ),
-                          const SizedBox(height: 12),
-                          const Text(
-                            'Your Financial Hub',
-                            style: TextStyle(
-                              fontFamily: 'SanFranciscoPro',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                              color: Colors.white70,
-                              letterSpacing: -0.3,
-                            ),
                           ),
                         ],
                       ),
@@ -186,7 +191,36 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                 },
               ),
             ),
-            // Menu Items
+            _buildMenuItem(
+              icon: Icons.sunny,
+              title: 'Weather',
+              onTap: () => Get.to(() => const WeatherScreen()),
+            ),
+            _buildMenuItem(
+              icon: Icons.gas_meter,
+              title: 'Gas Price',
+              onTap: () => Get.to(() => const GasPrice()),
+            ),
+            _buildMenuItem(
+              icon: Icons.ev_station,
+              title: 'EV Charging',
+              onTap: () => Get.to(() => const EvPrice()),
+            ),
+            _buildMenuItem(
+              icon: Icons.local_gas_station,
+              title: 'Diesel Price',
+              onTap: () => Get.to(() => const DesialPrice()),
+            ),
+            _buildMenuItem(
+              icon: Icons.cake,
+              title: 'Born Today',
+              onTap: () => Get.to(() => const BornPage()),
+            ),
+            _buildMenuItem(
+              icon: Icons.electric_meter,
+              title: "Holi Day",
+              onTap: () => Get.to(() => const CountryPage()),
+            ),
             _buildMenuItem(
               icon: Icons.currency_exchange_rounded,
               title: 'Forex Market',
@@ -256,25 +290,29 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.05),
+          color: const Color(0xFF1C1C1E),
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: const Color(0xFF2C2C2E).withOpacity(0.5),
+            width: 1,
+          ),
         ),
         child: Row(
           children: [
             Icon(
               icon,
               size: 24,
-              color: Colors.white70,
+              color: const Color(0xFFFFFFFF),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Text(
                 title,
                 style: const TextStyle(
-                  fontFamily: 'SanFranciscoPro',
+                  fontFamily: 'SF Pro Text',
                   fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: Colors.white,
+                  fontSize: 14,
+                  color: Color(0xFFFFFFFF),
                   letterSpacing: -0.3,
                 ),
               ),
@@ -282,7 +320,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
             const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 16,
-              color: Colors.white54,
+              color: Color(0xFF8E8E93),
             ),
           ],
         ),
@@ -298,28 +336,28 @@ class PrivacyPolicyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
         title: const Text(
           'Privacy Policy',
           style: TextStyle(
-            fontFamily: 'SanFranciscoPro',
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: Colors.white,
+            fontFamily: 'SF Pro Display',
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Color(0xFFFFFFFF),
           ),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xFF1C1C1E),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: Colors.white70),
+              size: 20, color: Color(0xFFFFFFFF)),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: const Center(
           child: Text('Privacy Policy Screen',
-              style: TextStyle(color: Colors.white))),
+              style: TextStyle(color: Color(0xFFFFFFFF)))),
     );
   }
 }
@@ -330,28 +368,28 @@ class TermsConditionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
         title: const Text(
           'Terms and Conditions',
           style: TextStyle(
-            fontFamily: 'SanFranciscoPro',
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: Colors.white,
+            fontFamily: 'SF Pro Display',
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Color(0xFFFFFFFF),
           ),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xFF1C1C1E),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: Colors.white70),
+              size: 20, color: Color(0xFFFFFFFF)),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: const Center(
           child: Text('Terms and Conditions Screen',
-              style: TextStyle(color: Colors.white))),
+              style: TextStyle(color: Color(0xFFFFFFFF)))),
     );
   }
 }
